@@ -1,0 +1,34 @@
+---
+start: awaken
+locations:
+    awaken:
+        text: >
+            You awaken on a cold, hard surface.
+            A small circle of light shines down on you from high above.
+        options:
+        -
+            text: Stand Up
+            goto: pit-start
+        -
+            text: Die
+            goto: generic-death
+    pit-start:
+        text: >
+            You slowly stand up and take in your surroundings.
+            You realize that you are in an extremely deep, cylindrical pit
+            with a smooth stone floor and walls. Almost no light reaches
+            you at the bottom.
+            
+            You can just make out a dark patch on one of the walls that could be a doorway.
+        options:
+        -
+            text: Doorway
+            goto: generic-death
+    generic-death:
+        text: >
+            You spontaneously combust, collapsing into a pile of ashes
+            in a matter of seconds.
+        options:
+        -
+            text: ""
+            goto: generic-death

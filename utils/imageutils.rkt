@@ -3,7 +3,7 @@
   (require "utils.rkt")
   (provide paragraph)
   
-  ; Takes a newline delimited string, and draws them split into lines.
+  ; Takes a newline delimited string, and draws it split into lines.
   (define (paragraph lines size color
                      #:align     [align "left"]
                      #:wrap      [wrap #f]
@@ -12,16 +12,17 @@
                      #:style     [style 'normal]
                      #:weight    [weight 'normal]
                      #:underline [underline #f]) 
-    (let ([lines (if (boolean? wrap)
-                     (if (string? lines)
-                         (string-split lines "\n")
-                         lines)
-                     (string-split
-                      (string-wrap
+    (let* ([str-lines (char-escapes
                        (if (string? lines)
                            lines
-                           (string-join lines "\n"))
-                       wrap) "\n"))])
+                           (string-join lines "\n")))]
+           [lines (string-split
+                   (if (boolean? wrap)
+                       str-lines
+                       (string-wrap
+                        str-lines
+                        wrap))
+                   "\n")])
       (cond [(empty? lines) empty-image]
             [else (above/align
                    align
@@ -35,4 +36,14 @@
                               #:family    family
                               #:style     style
                               #:weight    weight
-                              #:underline underline))]))))
+                              #:underline underline))])))
+  
+  (define (char-escapes s)
+    (string-replace
+     (string-replace
+      (string-replace
+       (string-replace
+        s "%%" "%")
+       "%n" "\n")
+      "%r" "\r")
+     "%t" "\t")))

@@ -26,6 +26,7 @@ locations:
             goto: generic-death
     generic-death:
         text: >
+            GAME OVER%n
             You spontaneously combust, collapsing into a pile of ashes
             in a matter of seconds.
         options:

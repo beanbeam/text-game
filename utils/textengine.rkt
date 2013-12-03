@@ -15,17 +15,16 @@
             (hash-ref game-defs "start")
             "start"))
       
-      (define/public (location-text)
-        (hash-ref (hash-ref (hash-ref game-defs
+      (define/private (location)
+        (hash-ref (hash-ref game-defs
                                       "locations")
-                            current-loc)
-                  "text"))
+                            current-loc))
+      
+      (define/public (location-text)
+        (hash-ref (location) "text"))
       
       (define/private (raw-options)
-        (hash-ref (hash-ref (hash-ref game-defs
-                                      "locations")
-                            current-loc)
-                  "options"))
+        (hash-ref (location) "options"))
       
       (define/public (location-options)
         (map (λ (o)

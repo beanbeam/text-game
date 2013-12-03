@@ -35,10 +35,11 @@
       (define/public (do! o)
         (set! current-loc
               (hash-ref (list-ref (raw-options) o)
-                        "goto")))
+                        "goto"))
+        (set! selected-option 0))
       
       (define/public (do-selected!)
-        (do! selected-option))
+        (do! (selected)))
       
       (define/public (select! o)
         (set! selected-option o))
@@ -47,7 +48,7 @@
         selected-option)
       
       (define/public (select-next!)
-        (select! (modulo (add1 selected-option) (length (raw-options)))))
+        (select! (modulo (add1 (selected)) (length (raw-options)))))
       
       (define/public (select-prev!)
-        (select! (modulo (add1 selected-option) (length (raw-options))))))))
+        (select! (modulo (add1 (selected)) (length (raw-options))))))))
